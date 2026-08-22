@@ -1,14 +1,19 @@
 import * as THREE from "three";
 import gsap from "gsap";
 
+let intensityInterval: number | null = null;
+let screenLightTimeline: gsap.core.Timeline | null = null;
+
 export function setCharTimeline(
   character: THREE.Object3D<THREE.Object3DEventMap> | null,
   camera: THREE.PerspectiveCamera
 ) {
   let intensity: number = 0;
-  setInterval(() => {
+  if (intensityInterval) clearInterval(intensityInterval);
+  intensityInterval = window.setInterval(() => {
     intensity = Math.random();
   }, 200);
+
   const tl1 = gsap.timeline({
     scrollTrigger: {
       trigger: ".landing-section",
@@ -52,7 +57,8 @@ export function setCharTimeline(
       object.material.transparent = true;
       object.material.opacity = 0;
       object.material.emissive.set("#C8BFFF");
-      gsap.timeline({ repeat: -1, repeatRefresh: true }).to(object.material, {
+      if (screenLightTimeline) screenLightTimeline.kill();
+      screenLightTimeline = gsap.timeline({ repeat: -1, repeatRefresh: true }).to(object.material, {
         emissiveIntensity: () => intensity * 8,
         duration: () => Math.random() * 0.6,
         delay: () => Math.random() * 0.1,
@@ -64,12 +70,31 @@ export function setCharTimeline(
   if (window.innerWidth > 1024) {
     if (character) {
       tl1
-        .fromTo(character.rotation, { y: 0 }, { y: 0.7, duration: 1 }, 0)
-        .to(camera.position, { z: 22 }, 0)
-        .fromTo(".character-model", { x: 0 }, { x: "-25%", duration: 1 }, 0)
-        .to(".landing-container", { opacity: 0, duration: 0.4 }, 0)
-        .to(".landing-container", { y: "40%", duration: 0.8 }, 0)
-        .fromTo(".about-me", { y: "-50%" }, { y: "0%" }, 0);
+        .fromTo(
+          character.rotation,
+          { x: 0, y: 0 },
+          { x: 0, y: 0.7, duration: 1 },
+          0
+        )
+        .fromTo(
+          camera.position,
+          { y: 13.1, z: 24.7 },
+          { y: 13.1, z: 22, duration: 1 },
+          0
+        )
+        .fromTo(
+          ".character-model",
+          { x: 0, y: "0%", pointerEvents: "inherit" },
+          { x: "-25%", y: "0%", duration: 1 },
+          0
+        )
+        .fromTo(
+          ".landing-container",
+          { opacity: 1, y: "0%" },
+          { opacity: 0, y: "40%", duration: 0.8 },
+          0
+        )
+        .fromTo(".about-me", { y: "-50%" }, { y: "0%", duration: 1 }, 0);
 
       tl2
         .to(
@@ -149,7 +174,6 @@ export function setAllTimeline() {
       { maxHeight: "100%", duration: 0.5 },
       0
     )
-
     .fromTo(
       ".career-timeline",
       { opacity: 0 },
@@ -160,16 +184,6 @@ export function setAllTimeline() {
       ".career-info-box",
       { opacity: 0 },
       { opacity: 1, stagger: 0.1, duration: 0.5 },
-      0
-    )
-    .fromTo(
-      ".career-dot",
-      { animationIterationCount: "infinite" },
-      {
-        animationIterationCount: "1",
-        delay: 0.3,
-        duration: 0.1,
-      },
       0
     );
 
@@ -189,3 +203,25 @@ export function setAllTimeline() {
     );
   }
 }
+
+export function setRevealAnimations() {
+  const elements = gsap.utils.toArray(".reveal-up");
+  elements.forEach((el: any) => {
+    gsap.fromTo(
+      el,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%", // Reveal when element is 85% down the viewport
+          toggleActions: "play none none reverse", // Play on scroll down, reverse on scroll up
+        },
+      }
+    );
+  });
+}
+

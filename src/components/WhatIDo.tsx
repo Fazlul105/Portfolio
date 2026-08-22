@@ -27,7 +27,7 @@ const WhatIDo = () => {
   return (
     <div className="whatIDO">
       <div className="what-box">
-        <h2 className="title">
+        <h2 className="title reveal-up">
           W<span className="hat-h2">HAT</span>
           <div>
             I<span className="do-h2"> DO</span>
@@ -86,25 +86,26 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
 
-            <div className="what-content-in">
+            <div className="what-content-in reveal-up">
               <h3>DEVELOP</h3>
-              <h4>Description</h4>
+              <h4>Full Stack (MERN)</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae.
+                Developing robust and scalable full-stack web applications with modern
+                architectures. Specializing in responsive frontends, clean RESTful APIs,
+                MVC structure, and efficient database designs with MongoDB and SQL.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
                 <div className="what-tags">JavaScript</div>
-                <div className="what-tags">TypeScript</div>
-                <div className="what-tags">Three.js</div>
-                <div className="what-tags">React</div>
-                <div className="what-tags">Css</div>
+                <div className="what-tags">React.js</div>
                 <div className="what-tags">Node.js</div>
-                <div className="what-tags">Next.js</div>
                 <div className="what-tags">Express.js</div>
-                <div className="what-tags">PHP</div>
-                <div className="what-tags">MySql</div>
+                <div className="what-tags">MongoDB</div>
+                <div className="what-tags">PostgreSQL</div>
+                <div className="what-tags">MySQL</div>
+                <div className="what-tags">REST APIs</div>
+                <div className="what-tags">Python</div>
+                <div className="what-tags">C / C++</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -127,23 +128,26 @@ const WhatIDo = () => {
               </svg>
             </div>
             <div className="what-corner"></div>
-            <div className="what-content-in">
-              <h3>DESIGN</h3>
-              <h4>Description</h4>
+            <div className="what-content-in reveal-up">
+              <h3>TEST & QA</h3>
+              <h4>Quality Assurance</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae
+                Ensuring software quality, reliability, and high performance through
+                ISTQB testing techniques, Agile/Scrum workflows, comprehensive test planning,
+                defect lifecycle tracking in JIRA, API testing in Postman, and JMeter load testing.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Blender</div>
-                <div className="what-tags">Zbrush</div>
-                <div className="what-tags">UI Design</div>
-                <div className="what-tags">Motion</div>
-                <div className="what-tags">Rigging</div>
-                <div className="what-tags">3D Animation</div>
-                <div className="what-tags">Character Design</div>
-                <div className="what-tags">Modelling</div>
+                <div className="what-tags">ISTQB Standards</div>
+                <div className="what-tags">JIRA</div>
+                <div className="what-tags">Postman (API)</div>
+                <div className="what-tags">JMeter</div>
+                <div className="what-tags">Agile (Scrum)</div>
+                <div className="what-tags">TestLink</div>
+                <div className="what-tags">TFS</div>
+                <div className="what-tags">Trello</div>
+                <div className="what-tags">Test Plans</div>
+                <div className="what-tags">Bug Reporting</div>
               </div>
               <div className="what-arrow"></div>
             </div>

@@ -34,7 +34,7 @@
 }
 .what-box-in {
   flex-direction: column;
-  height: 500px;
+  height: 600px;
   margin-left: 200px;
   position: relative;
   display: none;
@@ -72,6 +72,7 @@
   line-height: 18px;
   font-weight: 200;
   letter-spacing: 0.7px;
+  margin: 15px 0;
 }
 .what-content h4 {
   font-weight: 300;
@@ -144,11 +145,13 @@
 }
 .what-arrow {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 30px;
+  right: 30px;
   width: 25px;
   height: 25px;
   border: 1px solid #fff;
+  background-color: #0b0b0b; /* Add background to cover text if it overlaps */
+  z-index: 10;
 }
 .what-arrow::before {
   content: "";
@@ -207,6 +210,9 @@
 .what-content-in {
   height: 100%;
   overflow: hidden;
+  box-sizing: border-box;
+  padding-bottom: 25px;
+  padding-right: 15px; /* Prevent text from going strictly under the arrow */
 }
 .what-content-in h5 {
   font-weight: 300;
@@ -249,7 +255,7 @@
     margin-right: 20%;
   }
   .what-box-in {
-    height: 400px;
+    height: 500px;
   }
   .what-content h3 {
     font-size: 28px;
@@ -290,7 +296,7 @@
     padding-bottom: 50px;
   }
   .what-box-in {
-    height: 500px;
+    height: 600px;
     margin-left: -50px;
   }
   .what-content {
@@ -338,7 +344,7 @@
   }
   .what-box-in {
     margin-left: 0px;
-    height: 450px;
+    height: 550px;
   }
   .what-content h5,
   .what-content-flex {

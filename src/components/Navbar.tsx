@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
-import { ScrollSmoother } from "gsap-trial/ScrollSmoother";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 import "./styles/Navbar.css";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
@@ -13,8 +13,8 @@ const Navbar = () => {
     smoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
-      smooth: 1.7,
-      speed: 1.7,
+      smooth: 0.8,
+      speed: 1,
       effects: true,
       autoResize: true,
       ignoreMobileResize: true,
@@ -27,11 +27,15 @@ const Navbar = () => {
     links.forEach((elem) => {
       let element = elem as HTMLAnchorElement;
       element.addEventListener("click", (e) => {
-        if (window.innerWidth > 1024) {
+        const section = element.getAttribute("data-href");
+        if (section) {
           e.preventDefault();
-          let elem = e.currentTarget as HTMLAnchorElement;
-          let section = elem.getAttribute("data-href");
-          smoother.scrollTo(section, true, "top top");
+          if (smoother && window.innerWidth > 1024) {
+            smoother.scrollTo(section, true, "top top");
+          } else {
+            const target = document.querySelector(section);
+            target?.scrollIntoView({ behavior: "smooth" });
+          }
         }
       });
     });
@@ -39,18 +43,33 @@ const Navbar = () => {
       ScrollSmoother.refresh(true);
     });
   }, []);
+
+  const handleScrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (smoother && window.innerWidth > 1024) {
+      smoother.scrollTo(0, true);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <div className="header">
-        <a href="/#" className="navbar-title" data-cursor="disable">
-          Logo
+        <a
+          href="#landingDiv"
+          onClick={handleScrollToTop}
+          className="navbar-title"
+          data-cursor="disable"
+        >
+          FAZLUL
         </a>
         <a
-          href="mailto:example@mail.com"
+          href="mailto:fkshahead@gmail.com"
           className="navbar-connect"
           data-cursor="disable"
         >
-          example@mail.com
+          fkshahead@gmail.com
         </a>
         <ul>
           <li>

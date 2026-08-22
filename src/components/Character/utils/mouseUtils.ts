@@ -43,36 +43,27 @@ export const handleHeadRotation = (
   lerp: (x: number, y: number, t: number) => number
 ) => {
   if (!headBone) return;
-  if (window.scrollY < 200) {
-    const maxRotation = Math.PI / 6;
+  const scrollPos = window.scrollY || document.documentElement.scrollTop || 0;
+  if (scrollPos < 200) {
+    const maxYRotation = Math.PI / 6;
+    const maxXRotation = Math.PI / 8;
+
+    const clampedMouseX = Math.max(-1, Math.min(1, mouseX));
+    const clampedMouseY = Math.max(-1, Math.min(1, mouseY));
+
+    const targetY = clampedMouseX * maxYRotation;
+    const targetX = -clampedMouseY * maxXRotation - 0.08;
+
     headBone.rotation.y = lerp(
       headBone.rotation.y,
-      mouseX * maxRotation,
+      targetY,
       interpolationY
     );
-    let minRotationX = -0.3;
-    let maxRotationX = 0.4;
-    if (mouseY > minRotationX) {
-      if (mouseY < maxRotationX) {
-        headBone.rotation.x = lerp(
-          headBone.rotation.x,
-          -mouseY - 0.5 * maxRotation,
-          interpolationX
-        );
-      } else {
-        headBone.rotation.x = lerp(
-          headBone.rotation.x,
-          -maxRotation - 0.5 * maxRotation,
-          interpolationX
-        );
-      }
-    } else {
-      headBone.rotation.x = lerp(
-        headBone.rotation.x,
-        -minRotationX - 0.5 * maxRotation,
-        interpolationX
-      );
-    }
+    headBone.rotation.x = lerp(
+      headBone.rotation.x,
+      targetX,
+      interpolationX
+    );
   } else {
     if (window.innerWidth > 1024) {
       headBone.rotation.x = lerp(headBone.rotation.x, -0.4, 0.03);
@@ -80,3 +71,4 @@ export const handleHeadRotation = (
     }
   }
 };
+
